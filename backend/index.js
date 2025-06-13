@@ -20,29 +20,31 @@ app.use(cors({
   credentials: true
 }));
 
-// Middleware to parse JSON
 app.use(express.json());
 
 const PORT = process.env.PORT || 4000;
 const URI = process.env.MongoDBURI;
 
-// ✅ Connect to MongoDB
-try {
-  await mongoose.connect(URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
-  console.log("✅ Connected to MongoDB");
-} catch (error) {
-  console.log("❌ MongoDB Connection Error:", error);
+// ✅ MongoDB Connection
+async function connectDB() {
+  try {
+    await mongoose.connect(URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log("✅ Connected to MongoDB");
+  } catch (error) {
+    console.error("❌ MongoDB Connection Error:", error.message);
+    process.exit(1);
+  }
 }
+connectDB();
 
-// ✅ Define Routes
+// ✅ Routes
 app.use("/Blog", blogRoute);
 app.use("/User", userRoute);
 app.use("/MentalHealth", mentalHealthRoute);
 
-// ✅ Start Server
 app.listen(PORT, () => {
-  console.log(`🚀 Server is listening on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
