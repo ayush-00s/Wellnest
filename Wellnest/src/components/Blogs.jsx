@@ -12,7 +12,7 @@ const Blogs = () => {
   useEffect(() => {
     const getArticles = async() => {
       try {
-        const res = await axios.get("http://localhost:4001/Blog");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/Blog`);
         console.log(res.data);
         setArticles(res.data);
       } catch (error) {

@@ -30,7 +30,7 @@ const SignIn = () => {
         password: password
       };
       
-      const res = await axios.post("http://localhost:4001/User/SignIn", userInfo);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/User/SignIn`, userInfo);
       
       console.log(res.data);
       

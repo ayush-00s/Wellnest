@@ -39,7 +39,7 @@ export default function Create() {
       };
 
       // Send POST request to your API
-      const response = await axios.post('http://localhost:4001/Blog/create', blogData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/Blog/create`, blogData);
       
       if (response.data.success) {
         setSaved(true);
