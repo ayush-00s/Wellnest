@@ -60,7 +60,12 @@ const MentalHealthForm = () => {
   const fetchReports = async () => {
     setFetchError(null);
     try {
-      const response = await fetch(`http://localhost:4001/MentalHealth/getReports?userId=${userId}`);
+      const response = await fetch(`${API_CONFIG.REPORTS_URL}/MentalHealth/getReports?userId=${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       
       if (!response.ok) {
         const errorData = await response.json();
