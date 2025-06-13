@@ -9,3 +9,4 @@ langchain_community
 python-dotenv
 pypdf
 flask
+flask-cors

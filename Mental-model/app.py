@@ -1,5 +1,6 @@
 import os
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from langchain_groq import ChatGroq
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -19,6 +20,9 @@ os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
 
 # Initialize Flask app
 app = Flask(__name__)
+
+# Enable CORS for your Vercel frontend
+CORS(app, origins=["https://wellnest-three.vercel.app"])
 
 # ---- SETUP LLM ----
 def load_llm():
