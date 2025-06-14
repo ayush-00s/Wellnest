@@ -60,7 +60,7 @@ const MentalHealthForm = () => {
   const fetchReports = async () => {
     setFetchError(null);
     try {
-      const response = await fetch(`${API_CONFIG.REPORTS_URL}/MentalHealth/getReports?userId=${userId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/MentalHealth/getReports?userId=${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -327,8 +327,10 @@ const MentalHealthForm = () => {
     const question_origins = "PHQ-9, GAD-7, PSS-10";
 
     try {
+      const BACKEND_URL = 'https://wellnest-1.onrender.com';
+
       // First call the analysis endpoint
-      const analyzeResponse = await fetch('http://localhost:4001/MentalHealth/analyze', {
+      const analyzeResponse = await fetch(`${BACKEND_URL}/MentalHealth/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_responses, question_origins }),
@@ -374,7 +376,7 @@ const MentalHealthForm = () => {
       localStorage.setItem('lastAssessmentResult', JSON.stringify(assessmentData));
       
       // Then save the report
-      const saveResponse = await fetch('http://localhost:4001/MentalHealth/saveReport', {
+      const saveResponse = await fetch(`${BACKEND_URL}/MentalHealth/saveReport`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
